@@ -1,9 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Wifi, Mail, Phone, MapPin, Facebook, Instagram } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      element?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <footer className="bg-neutral-900 text-white">
@@ -25,24 +40,36 @@ export const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#plans" className="text-neutral-400 hover:text-white transition-colors text-sm">
+                <button
+                  onClick={() => scrollToSection('plans')}
+                  className="text-neutral-400 hover:text-white transition-colors text-sm cursor-pointer"
+                >
                   Internet Plans
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#streaming" className="text-neutral-400 hover:text-white transition-colors text-sm">
+                <button
+                  onClick={() => scrollToSection('streaming')}
+                  className="text-neutral-400 hover:text-white transition-colors text-sm cursor-pointer"
+                >
                   IPTV Streaming
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#bundles" className="text-neutral-400 hover:text-white transition-colors text-sm">
+                <button
+                  onClick={() => scrollToSection('bundle')}
+                  className="text-neutral-400 hover:text-white transition-colors text-sm cursor-pointer"
+                >
                   Bundle Deals
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#faq" className="text-neutral-400 hover:text-white transition-colors text-sm">
+                <button
+                  onClick={() => scrollToSection('faq')}
+                  className="text-neutral-400 hover:text-white transition-colors text-sm cursor-pointer"
+                >
                   FAQ
-                </a>
+                </button>
               </li>
             </ul>
           </div>

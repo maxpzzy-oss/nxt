@@ -1,14 +1,35 @@
 import React, { useEffect } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Wifi } from 'lucide-react';
 import { Footer } from './Footer';
 
 export const Layout: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+    if (location.hash) {
+      setTimeout(() => {
+        const element = document.getElementById(location.hash.substring(1));
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname, location.hash]);
+
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      element?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -40,29 +61,13 @@ export const Layout: React.FC = () => {
                 Free Trial
               </Link>
               <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (location.pathname !== '/') {
-                    window.location.href = '/#plans';
-                  } else {
-                    const element = document.getElementById('plans');
-                    element?.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => scrollToSection('plans')}
                 className="text-neutral-700 hover:text-primary-600 transition-colors cursor-pointer"
               >
                 Plans
               </button>
               <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (location.pathname !== '/') {
-                    window.location.href = '/#bundle';
-                  } else {
-                    const element = document.getElementById('bundle');
-                    element?.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => scrollToSection('bundle')}
                 className="text-neutral-700 hover:text-primary-600 transition-colors cursor-pointer"
               >
                 Bundles

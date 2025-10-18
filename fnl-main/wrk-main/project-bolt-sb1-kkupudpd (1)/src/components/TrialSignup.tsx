@@ -3,19 +3,10 @@ import { CheckCircle, Gift, Users as UsersIcon, AlertCircle } from 'lucide-react
 import { Card } from './Card';
 import { Input } from './Input';
 import { Button } from './Button';
-import { Dropdown } from './Dropdown';
-
-const packageOptions = [
-  { value: '3day', label: '3-Day Internet Plan' },
-  { value: '7day', label: '7-Day Internet Plan' },
-  { value: '14day', label: '14-Day Internet Plan' },
-  { value: '30day', label: '30-Day Internet Plan' },
-];
 
 export const TrialSignup: React.FC = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [selectedPackage, setSelectedPackage] = useState('');
   const [discordJoined, setDiscordJoined] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -85,10 +76,10 @@ export const TrialSignup: React.FC = () => {
             <Gift className="w-10 h-10 text-white" />
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4">
-            Start Your Free Trial
+            Start Your Free 1-Day Trial
           </h2>
           <p className="text-lg text-neutral-600">
-            Experience our lightning-fast 1 Gigabit internet for free
+            Experience our lightning-fast 1 Gigabit internet with a 1-day free trial
           </p>
         </div>
 
@@ -114,13 +105,11 @@ export const TrialSignup: React.FC = () => {
                 required
               />
 
-              <Dropdown
-                label="Select Plan to Trial"
-                options={packageOptions}
-                value={selectedPackage}
-                onChange={setSelectedPackage}
-                placeholder="Choose a package"
-              />
+              <div className="bg-secondary-50 border border-secondary-200 rounded-lg p-4">
+                <p className="text-sm font-semibold text-neutral-900 mb-1">Trial Plan</p>
+                <p className="text-lg font-bold text-secondary-600">1-Day Free Trial</p>
+                <p className="text-sm text-neutral-600 mt-1">Full access to 1 Gigabit internet speed</p>
+              </div>
 
               {error && (
                 <div className="bg-primary-50 border border-primary-200 rounded-lg p-3 flex items-start gap-2">
@@ -134,9 +123,9 @@ export const TrialSignup: React.FC = () => {
                 variant="primary"
                 size="lg"
                 className="w-full"
-                disabled={isSubmitting || !fullName || !email || !selectedPackage}
+                disabled={isSubmitting || !fullName || !email}
               >
-                {isSubmitting ? 'Submitting...' : 'Start Free Trial'}
+                {isSubmitting ? 'Submitting...' : 'Start 1-Day Free Trial'}
               </Button>
 
               <p className="text-xs text-neutral-600 text-center">

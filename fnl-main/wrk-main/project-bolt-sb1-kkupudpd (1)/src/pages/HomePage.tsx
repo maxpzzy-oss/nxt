@@ -30,7 +30,7 @@ export const HomePage: React.FC = () => {
         <InternetPlans />
       </section>
 
-      <section className="py-12 sm:py-16 lg:py-20 bg-neutral-50">
+      <section id="streaming" className="py-12 sm:py-16 lg:py-20 bg-neutral-50">
         <StreamingPackage />
       </section>
 
@@ -38,11 +38,11 @@ export const HomePage: React.FC = () => {
         <BundleBuilder />
       </section>
 
-      <section className="py-12 sm:py-16 lg:py-20 bg-neutral-50">
+      <section id="trial" className="py-12 sm:py-16 lg:py-20 bg-neutral-50">
         <TrialSignup />
       </section>
 
-      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+      <section id="faq" className="py-12 sm:py-16 lg:py-20 bg-white">
         <FAQ />
       </section>
     </div>
